@@ -1,0 +1,2 @@
+pvporcupine==2.1.4
+PyAudio==0.2.13
