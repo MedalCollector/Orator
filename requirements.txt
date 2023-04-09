@@ -1,2 +1,4 @@
 pvporcupine==2.1.4
 PyAudio==0.2.13
+baidu-aip==4.16.10
+SpeechRecognition==3.10.0
