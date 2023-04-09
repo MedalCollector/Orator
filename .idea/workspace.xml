@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3cc872f3-4e2a-4257-b220-b30993fac338" name="变更" comment="">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,10 +41,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/speechmodules" />
       <recent name="$PROJECT_DIR$/wakeword" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.speech2text">
+  <component name="RunManager" selected="Python.text2speech">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Orator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,8 +132,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.speech2text" />
         <item itemvalue="Python.text2speech" />
+        <item itemvalue="Python.speech2text" />
         <item itemvalue="Python.wakeword" />
       </list>
     </recent_temporary>
