@@ -1,0 +1,29 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="9">
+            <item index="0" class="java.lang.String" itemvalue="mysqlclient" />
+            <item index="1" class="java.lang.String" itemvalue="pywin32" />
+            <item index="2" class="java.lang.String" itemvalue="SQLAlchemy" />
+            <item index="3" class="java.lang.String" itemvalue="mitmproxy" />
+            <item index="4" class="java.lang.String" itemvalue="PyMySQL" />
+            <item index="5" class="java.lang.String" itemvalue="pyquery" />
+            <item index="6" class="java.lang.String" itemvalue="Flask-SQLAlchemy" />
+            <item index="7" class="java.lang.String" itemvalue="redis" />
+            <item index="8" class="java.lang.String" itemvalue="Flask" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

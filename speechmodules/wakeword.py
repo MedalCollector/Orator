@@ -1,8 +1,8 @@
 import pvporcupine
 import pyaudio
 import struct
-PICOVOICE_API_KEY = ""
-keyword_path = '*.ppn'
+PICOVOICE_API_KEY = ""  # 你的picovoice key
+keyword_path = './Hey-Murphy_en_mac_v2_1_0.ppn'  # 你的唤醒词检测离线文件地址
 
 
 class PicoWakeWord:
