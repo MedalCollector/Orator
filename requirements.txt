@@ -11,3 +11,5 @@ cn2an==0.5.19
 requests==2.28.2
 wolframalpha==5.0.0
 pygame==2.3.0
+asyncio==3.4.3
+

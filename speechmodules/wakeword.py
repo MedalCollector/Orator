@@ -1,17 +1,21 @@
+import struct
+
 import pvporcupine
 import pyaudio
-import struct
+
 PICOVOICE_API_KEY = ""  # 你的picovoice key
 keyword_path = './Hey-Murphy_en_mac_v2_1_0.ppn'  # 你的唤醒词检测离线文件地址
 
 
 class PicoWakeWord:
-    def __init__(self, PICOVOICE_API_KEY, keyword_path):
+    def __init__(self, PICOVOICE_API_KEY, keyword_path, model_path=None):
         self.PICOVOICE_API_KEY = PICOVOICE_API_KEY
         self.keyword_path = keyword_path
+        self.model_path = model_path
         self.porcupine = pvporcupine.create(
             access_key=self.PICOVOICE_API_KEY,
-            keyword_paths=[self.keyword_path]
+            keyword_paths=[self.keyword_path],
+            model_path=self.model_path
         )
         self.myaudio = pyaudio.PyAudio()
         self.stream = self.myaudio.open(
@@ -37,5 +41,5 @@ if __name__ == '__main__':
         audio_obj_unpacked = struct.unpack_from("h" * picowakeword.porcupine.frame_length, audio_obj)
 
         keyword_idx = picowakeword.porcupine.process(audio_obj_unpacked)
-        if keyword_idx >=0:
+        if keyword_idx >= 0:
             print("我听到了！")
