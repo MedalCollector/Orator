@@ -1,7 +1,10 @@
+import time
+
 from speechmodules.wakeword import PicoWakeWord
 from speechmodules.speech2text import BaiduASR, AzureASR, OpenaiASR
 from speechmodules.text2speech import BaiduTTS, Pyttsx3TTS, AzureTTS, EdgeTTS
 from chatmodules.openai_chat_module import OpenaiChatModule
+from chatmodules.openai_agent_module import OpenaiAgentModule
 import struct
 
 PICOVOICE_API_KEY = ""  # 你的picovoice key
@@ -32,7 +35,8 @@ def run(picowakeword, asr, tts, openai_chat_module):
             while True:  # 进入一次对话session
                 q = asr.speech_to_text()
                 print(f'recognize_from_microphone, text={q}')
-                res = openai_chat_module.chat_with_origin_model(q)
+                # res = openai_chat_module.chat_with_origin_model(q)
+                res = openai_chat_module.chat_with_agent(q)
                 print(res)
                 tts.text_to_speech_and_play('嗯'+res)
 
@@ -43,7 +47,8 @@ def Orator():
     # tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
     asr = OpenaiASR(openai_api_key)
     tts = EdgeTTS()
-    openai_chat_module = OpenaiChatModule(openai_api_key)
+    ##openai_chat_module = OpenaiChatModule(openai_api_key)
+    openai_chat_module = OpenaiAgentModule(openai_api_key)
     try:
         run(picowakeword, asr, tts, openai_chat_module)
     except KeyboardInterrupt:

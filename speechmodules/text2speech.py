@@ -1,6 +1,12 @@
-# pip install azure-cognitiveservices-speech
-import asyncio
 
+# 感谢Linky小伙伴对于Windows版本运行说明以及代码的贡献!
+from aip import AipSpeech
+from playsound import playsound # windows环境下playsound运行可能不稳定
+# pip install pygame
+import pygame # 导入pygame，playsound报错或运行不稳定时直接使用
+import pyttsx3
+import asyncio
+# pip install azure-cognitiveservices-speech
 import azure.cognitiveservices.speech as speechsdk
 import pyttsx3
 from aip import AipSpeech
@@ -23,11 +29,21 @@ class BaiduTTS:
         })  # 得到音频的二进制文件
 
         if not isinstance(result, dict):
-            with open("./audio.wav", "wb") as f:
+            with open("./audio.mp3", "wb") as f:
                 f.write(result)
         else:
             print("语音合成失败", result)
-        playsound('./audio.wav')
+        # playsound('./audio.mp3')  # playsound无法运行时删去此行改用pygame，若正常运行择一即可
+        self.play_audio_with_pygame('audio.mp3')  # 注意pygame只能识别mp3格式
+
+    def play_audio_with_pygame(self, audio_file_path):
+        # 代码来自Linky的贡献
+        pygame.mixer.init()
+        pygame.mixer.music.load(audio_file_path)
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
+        pygame.mixer.quit()
 
 
 class Pyttsx3TTS:
