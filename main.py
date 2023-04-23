@@ -1,6 +1,6 @@
 from speechmodules.wakeword import PicoWakeWord
-from speechmodules.speech2text import BaiduASR, AzureASR
-from speechmodules.text2speech import BaiduTTS, Pyttsx3TTS, AzureTTS
+from speechmodules.speech2text import BaiduASR, AzureASR, OpenaiASR
+from speechmodules.text2speech import BaiduTTS, Pyttsx3TTS, AzureTTS, EdgeTTS
 from chatmodules.openai_chat_module import OpenaiChatModule
 import struct
 
@@ -37,8 +37,10 @@ def run(picowakeword, asr, tts, openai_chat_module):
 
 def Orator():
     picowakeword = PicoWakeWord(PICOVOICE_API_KEY, keyword_path)
-    asr = AzureASR(AZURE_API_KEY, AZURE_REGION)
-    tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
+    # asr = AzureASR(AZURE_API_KEY, AZURE_REGION)
+    # tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
+    asr = EdgeTTS()
+    tts = OpenaiASR(openai_api_key)
     openai_chat_module = OpenaiChatModule(openai_api_key)
     try:
         run(picowakeword, asr, tts, openai_chat_module)
