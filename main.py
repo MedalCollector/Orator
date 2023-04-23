@@ -6,6 +6,7 @@ import struct
 
 PICOVOICE_API_KEY = ""  # 你的picovoice key
 keyword_path = './speechmodules/Hey-Murphy_en_mac_v2_1_0.ppn'  # 你的唤醒词检测离线文件地址
+model_path = '' # 中文模型地址
 Baidu_APP_ID = ''  # 你的百度APP_ID
 Baidu_API_KEY = ''  # 你的百度API_KEY
 Baidu_SECRET_KEY = ''  # 你的百度SECRET_KEY
@@ -13,6 +14,7 @@ openai_api_key = ""
 
 AZURE_API_KEY = ""
 AZURE_REGION = ""
+
 
 
 def run(picowakeword, asr, tts, openai_chat_module):
@@ -36,11 +38,11 @@ def run(picowakeword, asr, tts, openai_chat_module):
 
 
 def Orator():
-    picowakeword = PicoWakeWord(PICOVOICE_API_KEY, keyword_path)
+    picowakeword = PicoWakeWord(PICOVOICE_API_KEY, keyword_path, model_path)
     # asr = AzureASR(AZURE_API_KEY, AZURE_REGION)
     # tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
-    asr = EdgeTTS()
-    tts = OpenaiASR(openai_api_key)
+    asr = OpenaiASR(openai_api_key)
+    tts = EdgeTTS()
     openai_chat_module = OpenaiChatModule(openai_api_key)
     try:
         run(picowakeword, asr, tts, openai_chat_module)
