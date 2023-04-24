@@ -19,3 +19,8 @@ class GetTimeRun(object):
         if weekday_cn == "七":
             weekday_cn = "日"
         return "今天的日期是:" + date_now_str + ",目前的时间是:" + time_now_str + ",今天是星期" + weekday_cn
+
+
+if __name__ == '__main__':
+    print(GetTimeRun().run(''))
+    # 今天的日期是: 2023年04月24日, 目前的时间是: 14时40分43秒, 今天是星期一

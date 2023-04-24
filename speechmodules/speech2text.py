@@ -55,6 +55,7 @@ class BaiduASR:
         else:
             return result['result'][0]
 
+
 class OpenaiASR:
     def __init__(self, API_KEY):
         self.API_KEY = API_KEY
@@ -82,10 +83,10 @@ class OpenaiASR:
         return audio_data
 
     def _get_speech_text(self, audio_file):
-        # print('调用用语音识别')
+        print('调用用语音识别')
         url = 'https://api.openai.com/v1/audio/transcriptions'
         headers = {
-            'Authorization': 'Bearer ' + self.API_KEY,
+            'Authorization': 'Bearer ' + self.API_KEY
         }
         files = {
             'file': ('./speech.wav', audio_file),
@@ -104,8 +105,6 @@ class OpenaiASR:
         else:
             result = self._get_speech_text(audio_path)
         return result
-
-
 
 
 class AzureASR:
@@ -136,15 +135,16 @@ class AzureASR:
 
 
 if __name__ == '__main__':
-    APP_ID = ''
-    API_KEY = ''
-    SECRET_KEY = ''
-    baiduasr = BaiduASR(APP_ID, API_KEY, SECRET_KEY)
-    result = baiduasr.speech_to_text()
-    print(result)
-    AZURE_API_KEY = ""
-    AZURE_REGION = ""
-    azureasr = AzureASR(AZURE_API_KEY, AZURE_REGION)
-    azureasr.speech_to_text()
-    openaiasr = OpenaiASR(APP_ID)
+    # APP_ID = ''
+    # API_KEY = ''
+    # SECRET_KEY = ''
+    # baiduasr = BaiduASR(APP_ID, API_KEY, SECRET_KEY)
+    # result = baiduasr.speech_to_text()
+    # print(result)
+    # AZURE_API_KEY = ""
+    # AZURE_REGION = ""
+    # azureasr = AzureASR(AZURE_API_KEY, AZURE_REGION)
+    # azureasr.speech_to_text()
+    openai_api_key = ""
+    openaiasr = OpenaiASR(openai_api_key)
     print(openaiasr.speech_to_text())

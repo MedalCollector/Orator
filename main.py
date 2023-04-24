@@ -1,22 +1,21 @@
-import time
-
 from speechmodules.wakeword import PicoWakeWord
 from speechmodules.speech2text import BaiduASR, AzureASR, OpenaiASR
 from speechmodules.text2speech import BaiduTTS, Pyttsx3TTS, AzureTTS, EdgeTTS
 from chatmodules.openai_chat_module import OpenaiChatModule
 from chatmodules.openai_agent_module import OpenaiAgentModule
+import asyncio
 import struct
-
+import os
+os.environ["SERPER_API_KEY"] = "" # 你的serper key
+openai_api_key = ""  # 你的openai key
 PICOVOICE_API_KEY = ""  # 你的picovoice key
 keyword_path = './speechmodules/Hey-Murphy_en_mac_v2_1_0.ppn'  # 你的唤醒词检测离线文件地址
 model_path = '' # 中文模型地址
 Baidu_APP_ID = ''  # 你的百度APP_ID
 Baidu_API_KEY = ''  # 你的百度API_KEY
 Baidu_SECRET_KEY = ''  # 你的百度SECRET_KEY
-openai_api_key = ""
-
-AZURE_API_KEY = ""
-AZURE_REGION = ""
+AZURE_API_KEY = ""  # 你的azure key
+AZURE_REGION = ""  # 你的azure region
 
 
 
@@ -32,21 +31,23 @@ def run(picowakeword, asr, tts, openai_chat_module):
 
             print("嗯,我在,请讲！")
             tts.text_to_speech_and_play("嗯,我在,请讲！")
+            # asyncio.run(tts.text_to_speech_and_play("嗯,我在,请讲！"))  # 如果用Edgetts需要使用异步执行
             while True:  # 进入一次对话session
                 q = asr.speech_to_text()
                 print(f'recognize_from_microphone, text={q}')
                 # res = openai_chat_module.chat_with_origin_model(q)
                 res = openai_chat_module.chat_with_agent(q)
                 print(res)
-                tts.text_to_speech_and_play('嗯'+res)
+                tts.text_to_speech_and_play('嗯' + res)
+                # asyncio.run(tts.text_to_speech_and_play('嗯'+res))  # 如果用Edgetts需要使用异步执行
 
 
 def Orator():
-    picowakeword = PicoWakeWord(PICOVOICE_API_KEY, keyword_path, model_path)
-    # asr = AzureASR(AZURE_API_KEY, AZURE_REGION)
-    # tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
-    asr = OpenaiASR(openai_api_key)
-    tts = EdgeTTS()
+    picowakeword = PicoWakeWord(PICOVOICE_API_KEY, keyword_path)
+    asr = AzureASR(AZURE_API_KEY, AZURE_REGION)
+    tts = AzureTTS(AZURE_API_KEY, AZURE_REGION)
+    # asr = OpenaiASR(openai_api_key)
+    # tts = EdgeTTS()
     ##openai_chat_module = OpenaiChatModule(openai_api_key)
     openai_chat_module = OpenaiAgentModule(openai_api_key)
     try:
@@ -64,7 +65,8 @@ def Orator():
             exit(0)
     finally:
         print('本轮对话结束')
-        tts.text_to_speech_and_play('嗯'+'主人，我退下啦！')
+        tts.text_to_speech_and_play('嗯' + '主人，我退下啦！')
+        # asyncio.run(tts.text_to_speech_and_play('嗯'+'主人，我退下啦！'))  # 如果用Edgetts需要使用异步执行
         if picowakeword.porcupine is not None:
             picowakeword.porcupine.delete()
             print("Deleting porc")

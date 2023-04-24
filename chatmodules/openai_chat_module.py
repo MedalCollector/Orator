@@ -18,7 +18,8 @@ class OpenaiChatModule:
         print(f'chatGPT Q:{text}')
         self.origin_model_conversation.append({"role": "user", "content": text})
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            # model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=self.origin_model_conversation,
             max_tokens=2048,
             temperature=0.3,
